@@ -62,7 +62,7 @@ X['risk_free_rate'] = r_real
 def neural_model_train(X_train, Y_train):
     
 
-    # Defining neural network architecture, 2 layers of 64 neurons with rectifier activation function, output gives the 5 varied Heston parameters
+    # Defining neural network architecture, 2 layers of 64 neurons with rectifier activation function, output gives the 4 varied Heston parameters
     neural_model = Sequential([Dense(64, activation = 'relu', input_shape = (1,)), Dense(64, activation = 'relu'), Dense(4, activation = 'linear')])
 
     # Compiling the model with Adam optimizer and a standard MSE loss function, fixed learning rate 
