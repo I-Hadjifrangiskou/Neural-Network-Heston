@@ -10,7 +10,7 @@ from tensorflow.python.keras.optimizers import adam_v2
 import yfinance as yf
 import pandas as pd
 
-
+# Starting time, used for potential optimisation in the future
 startTime = datetime.now()
 
 # Define how long ago (in days) you would like to predict from
@@ -50,7 +50,6 @@ market_prices = np.concatenate(np.expand_dims(calls['lastPrice'].values, axis=1)
 # Time to maturity and timestep size
 expiry_date = datetime.strptime(expirations[1], "%Y-%m-%d")
 today = datetime.today()
-#T_real = (expiry_date - today).days / 365
 T_real = period_days / 365
 timestep = T_real / 100
 
