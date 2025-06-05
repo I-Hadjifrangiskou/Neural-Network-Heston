@@ -11,11 +11,11 @@ The Heston model is solved using the **Quadratic-Exponential (QE) scheme** propo
 
 ## Key Features
 
-- 📈 **Real Market Data Integration**: Pulls historical SPY option prices and implied volatilities from Yahoo Finance.
-- 🧠 **Neural Network Calibration**: Predicts Heston parameters (`kappa`, `theta`, `epsilon`, `rho`) from option prices using a trained neural network.
-- 🔁 **Monte Carlo Simulation**: Prices European call options via simulation under the Heston model with the predicted parameters.
-- 📊 **Model Evaluation**: Compares predicted option prices with real market prices and visualizes the difference.
-- 🧪 **Loss Curve Tracking**: Tracks and plots the training loss to monitor convergence of the neural network.
+- **Real Market Data Integration**: Pulls historical SPY option prices and implied volatilities from Yahoo Finance.
+-  **Neural Network Calibration**: Predicts Heston parameters (`kappa`, `theta`, `epsilon`, `rho`) from option prices using a trained neural network.
+-  **Monte Carlo Simulation**: Prices European call options via simulation under the Heston model with the predicted parameters.
+-  **Model Evaluation**: Compares predicted option prices with real market prices and visualizes the difference.
+-  **Loss Curve Tracking**: Tracks and plots the training loss to monitor convergence of the neural network.
 
 ---
 
