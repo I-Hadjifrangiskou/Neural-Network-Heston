@@ -95,8 +95,8 @@ pip install numpy scipy matplotlib pandas tensorflow yfinance
 
 ## Author
 
-[Your Name]  
-Quantitative Finance Enthusiast | Python + Stochastic Models | [LinkedIn or GitHub link]
+Ioannis Hadjifrangiskou
+Quantitative Finance Enthusiast | Python + Stochastic Models | 
 
 ---
 
