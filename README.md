@@ -70,10 +70,10 @@ pip install numpy scipy matplotlib pandas tensorflow yfinance
 
 ## Example Output
 
-📉 **Training Loss Curve**  
+ **Training Loss Curve**  
 ![Loss Curve](loss_curve.png)
 
-📊 **Model vs Market Prices**  
+ **Model vs Market Prices**  
 ![Predicted vs Market](Heston_neural.png)
 
 ---
