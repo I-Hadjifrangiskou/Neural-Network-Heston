@@ -1,14 +1,12 @@
 import numpy as np
 import scipy
-from scipy.stats import norm
 import matplotlib.pyplot as plt
 from datetime import datetime
-import tensorflow as tf
-from tensorflow.python.keras.models import Sequential
-from tensorflow.python.keras.layers import Dense
-from tensorflow.python.keras.optimizers import adam_v2
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense
+from tensorflow.keras.optimizers import Adam
 import yfinance as yf
-import pandas as pd
+from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 
 # Starting time, used for potential optimisation in the future
 startTime = datetime.now()
@@ -66,7 +64,7 @@ def neural_model_train(X_train, Y_train):
     neural_model = Sequential([Dense(64, activation = 'relu', input_shape = (1,)), Dense(64, activation = 'relu'), Dense(4, activation = 'linear')])
 
     # Compiling the model with Adam optimizer and a standard MSE loss function, fixed learning rate 
-    neural_model.compile(optimizer = adam_v2.Adam(learning_rate = 0.001), loss = 'mse')
+    neural_model.compile(optimizer = Adam(learning_rate = 0.001), loss = 'mse')
 
     # Training the model and storing training history
     history = neural_model.fit(X_train, Y_train, epochs = 100, batch_size = 32, verbose = 1)
@@ -179,7 +177,7 @@ def training_data_generator(n_samples, S0, strikes,  mu, implied_vol ):
     # Time to maturity, timestep size and Monte Carlo runs
     T  = T_real
     dt = timestep
-    monte_runs = 50
+    monte_runs = 100
 
     # Generate option prices using Heston model for above parameter set
     option_prices = np.array([heston_model_montecarlo(T, dt, monte_runs, S0, mu, K = strike,  kappa = k, theta = t, epsilon = e, rho = r, v0 = v) for strike, k, t, e, r, v in zip(strikes, kappa, theta, epsilon, rho, implied_vol)])
@@ -212,6 +210,16 @@ predicted_prices = np.array([
 # Check runtime for future optimization
 print("Runtime", datetime.now() - startTime) 
 
+# Evaluate model performance
+rmse = np.sqrt(mean_squared_error(market_prices, predicted_prices))
+mae = mean_absolute_error(market_prices, predicted_prices)
+r2 = r2_score(market_prices, predicted_prices)
+
+print(f"\nPerformance Metrics:")
+print(f"Root Mean Squared Error (RMSE): {rmse:.4f}")
+print(f"Mean Absolute Error (MAE): {mae:.4f}")
+print(f"R-squared (R²): {r2:.4f}")
+
 # Plot and save Model-Predicted vs. Real Market Prices
 plt.figure(figsize = (10, 5))
 plt.plot(strikes, market_prices, 'o-', label = "Real Market Prices", color='blue')
@@ -220,6 +228,6 @@ plt.xlabel("Strike Price")
 plt.ylabel("Option Price")
 plt.legend()
 plt.title("Model-Predicted vs. Real Market Option Prices")
-plt.savefig("Heston_neural.png")
+plt.savefig("Heston_neural2.png")
 plt.show()
 
